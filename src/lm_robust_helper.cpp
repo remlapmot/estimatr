@@ -344,7 +344,7 @@ List lm_variance(Eigen::Map<Eigen::MatrixXd>& X,
   int n_hypotheses = 0;
   Eigen::MatrixXd C_hyp, H1c, H2c, H3c, P_hyp;
   if (hypotheses.isNotNull()) {
-    n_hypotheses = Rcpp::NumericMatrix(hypotheses).nrow();
+    n_hypotheses = Rcpp::NumericMatrix(hypotheses.get()).nrow();
   }
   Eigen::VectorXd hypothesis_dof = Eigen::VectorXd::Constant(n_hypotheses, -99.0);
   if (!has_hypotheses) n_hypotheses = 0;
@@ -483,7 +483,7 @@ List lm_variance(Eigen::Map<Eigen::MatrixXd>& X,
         // first columns of the design; any fixed-effect dummy columns after
         // them carry zero weight.
         if (has_hypotheses) {
-          Rcpp::NumericMatrix hm(hypotheses);
+          Rcpp::NumericMatrix hm(hypotheses.get());
           n_hypotheses = hm.nrow();
           C_hyp = Eigen::MatrixXd::Zero(n_hypotheses, meat_cols);
           for (int h = 0; h < n_hypotheses; ++h) {
