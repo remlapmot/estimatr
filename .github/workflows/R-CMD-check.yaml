@@ -7,9 +7,10 @@
 # installing the older version, so nothing here depends on estimatr itself.
 on:
   push:
-    branches: [rewrite]
+    branches: [main, fix-macos27]
   pull_request:
     branches: [rewrite]
+  workflow_dispatch:
 
 name: R-CMD-check.yaml
 
@@ -35,6 +36,7 @@ jobs:
           - {os: ubuntu-latest,  r: 'release'}
           - {os: ubuntu-latest,  r: 'oldrel-1'}
           - {os: macos-latest,   r: 'release'}
+          - {os: xcode-27,       r: 'release'}
           - {os: windows-latest, r: 'release'}
 
     env:
